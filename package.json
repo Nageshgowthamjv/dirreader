@@ -1,0 +1,22 @@
+{
+  "name": "dirReader",
+  "version": "1.0.0",
+  "description": "Simple directory Reader",
+  "main": "index.js",
+  "engines": {
+    "node": ">=6.11.0"
+  },
+  "scripts": {
+    "test": "mocha tests/dirReaderSpec",
+    "start": "node index"
+  },
+  "keywords": [
+    "dirReader"
+  ],
+  "author": "nagesh.goetham@gmail.com",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^4.1.0",
+    "mocha": "^3.4.2"
+  }
+}

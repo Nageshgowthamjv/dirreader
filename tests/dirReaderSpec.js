@@ -1,5 +1,6 @@
 var expect = require('chai').expect;
 var fs = require('fs');
+var path = require('path');
 var dirReader = require('../dirReader');
 
 function init() {
@@ -67,17 +68,17 @@ describe('1. API readDirSync - Synchronous', function() {
 			let result = dirReader.readDirSync('./test1');
 			let expected = {
 				filenames: [
-					'test1\\test2\\text2.txt',
-					'test1\\test3\\text3.txt',
-					'test1\\test4\\text4',
-					'test1\\text1.txt'
+					path.normalize('test1\\test2\\text2.txt'),
+					path.normalize('test1\\test3\\text3.txt'),
+					path.normalize('test1\\test4\\text4'),
+					path.normalize('test1\\text1.txt')
 				],
 				dirnames: [
-					'test1\\test2',
-					'test1\\test2\\test5',
-					'test1\\test3',
-					'test1\\test3\\test6',
-					'test1\\test4'
+					path.normalize('test1\\test2'),
+					path.normalize('test1\\test2\\test5'),
+					path.normalize('test1\\test3'),
+					path.normalize('test1\\test3\\test6'),
+					path.normalize('test1\\test4')
 				]
 			};
 
@@ -91,8 +92,8 @@ describe('1. API readDirSync - Synchronous', function() {
 		it(' +ve: Test reading with sub-dir', function() {
 			let result = dirReader.readDirSync('./test1/test2');
 			let expected = {
-				filenames: ['test1\\test2\\text2.txt'],
-				dirnames: ['test1\\test2\\test5']
+				filenames: [path.normalize('test1\\test2\\text2.txt')],
+				dirnames: [path.normalize('test1\\test2\\test5')]
 			};
 			expect(result).to.have.property('filenames').with.lengthOf(1);
 			expect(result).to.have.property('dirnames').with.lengthOf(1);
@@ -104,7 +105,7 @@ describe('1. API readDirSync - Synchronous', function() {
 		it(' +ve: Test reading with sub-dir having file with no file-type', function() {
 			let result = dirReader.readDirSync('./test1/test4');
 			let expected = {
-				filenames: ['test1\\test4\\text4'],
+				filenames: [path.normalize('test1\\test4\\text4')],
 				dirnames: []
 			};
 			expect(result).to.have.property('filenames').with.lengthOf(1);
@@ -153,17 +154,17 @@ describe('2. API readDir - Asynchronous', function() {
 
 				let expected = {
 					filenames: [
-						'test1\\test2\\text2.txt',
-						'test1\\test3\\text3.txt',
-						'test1\\test4\\text4',
-						'test1\\text1.txt'
+						path.normalize('test1\\test2\\text2.txt'),
+						path.normalize('test1\\test3\\text3.txt'),
+						path.normalize('test1\\test4\\text4'),
+						path.normalize('test1\\text1.txt')
 					],
 					dirnames: [
-						'test1\\test2',
-						'test1\\test2\\test5',
-						'test1\\test3',
-						'test1\\test3\\test6',
-						'test1\\test4'
+						path.normalize('test1\\test2'),
+						path.normalize('test1\\test2\\test5'),
+						path.normalize('test1\\test3'),
+						path.normalize('test1\\test3\\test6'),
+						path.normalize('test1\\test4')
 					]
 				};
 
@@ -178,7 +179,7 @@ describe('2. API readDir - Asynchronous', function() {
 		it('+ve: Test reading with sub-dir', function() {
 			dirReader.readDir('./test1/test2', function(err, result) {
 				let expected = {
-					filenames: ['test1\\test4\\text4'],
+					filenames: [path.normalize('test1\\test4\\text4')],
 					dirnames: []
 				};
 				expect(result).to.have.property('filenames').with.lengthOf(1);
@@ -192,7 +193,7 @@ describe('2. API readDir - Asynchronous', function() {
 		it('+ve: Test reading with sub-dir having file with no file type', function() {
 			dirReader.readDir('./test1/test4', function(err, result) {
 				let expected = {
-					filenames: ['test1\\test4\\text4'],
+					filenames: [path.normalize('test1\\test4\\text4')],
 					dirnames: []
 				};
 				expect(result).to.have.property('filenames').with.lengthOf(1);
